@@ -1,12 +1,30 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import domain from '../../Domain'
+import DiscountedGames from '../DiscountedGames/DiscountedGames'
+import FreeGames from '../FreeGames/FreeGames'
+import TopGames from '../TopGames/TopGames'
 
 const Games = () => {
     
     return (
-        <>
-        <h1>domain</h1>
-        </>
+        <div style={{ "backgroundColor": "black" }} id="games">
+            <div className="mb-10 text-center mt-12">
+                {/* <h2 className="text-base text-blue-700 font-semibold tracking-wide uppercase">
+                    List of Orders
+                </h2> */}
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white dark:text-white sm:text-4xl">
+                    Browse Games
+                </p>
+            </div>
+            <DiscountedGames></DiscountedGames>
+            
+            <TopGames></TopGames>
+
+            <FreeGames></FreeGames>
+
+            <Link to="/" className="px-12 py-4 bg-blue-700 hover:bg-blue-800 transition duration-100 ease-in-out shadow hover:shadow-lg transform hover:scale-110 text-white font-semibold text-lg rounded inline-block mb-12">Browse All</Link>
+        </div>
     )
 }
 
