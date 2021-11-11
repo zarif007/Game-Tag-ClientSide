@@ -8,13 +8,13 @@ const Banner = () => {
             <div class="container mx-auto px-5 text-center">
                 <div class="mb-16">
                     <div class="space-y-4 mb-12">
-                        <h4 class="text-2xl sm:text-3xl font-semibold text-white">Phantom 4PRO V2.0</h4>
-                        <h1 class="text-5xl sm:text-7xl font-bold text-white">Visionary intelligence</h1>
-                        <p class="sm:w-3/4 lg:w-2/4 xl:w-96 mx-auto text-lg sm:text-xl text-gray-600">Free HTML Single Product eCommerce langing page template</p>
+                        <h4 class="text-2xl sm:text-3xl font-semibold text-blue-700">Best Game Shop</h4>
+                        <h1 class="text-5xl sm:text-7xl font-bold text-white">Buy, Collect, Play</h1>
+                        <p class="sm:w-3/4 lg:w-2/4 xl:w-96 mx-auto text-lg sm:text-xl text-gray-600">Get favourite Games from here</p>
                     </div>
                     <button class="px-12 py-4 bg-blue-700 hover:bg-blue-800 transition duration-100 ease-in-out shadow hover:shadow-lg transform hover:scale-110 text-white font-semibold text-lg rounded-full inline-block">Buy now</button>
                 </div>
-                <img class="mx-auto xl:max-w-screen-lg mb-28" src="https://i.ibb.co/7KQ4pgt/Game-Tag.png" alt="Drone"/>
+                <img class="mx-auto xl:max-w-screen-lg mb-28" src="https://i.ibb.co/strf13Y/Untitled-designu.png" alt="Drone"/>
             </div>
         </section>
   )
