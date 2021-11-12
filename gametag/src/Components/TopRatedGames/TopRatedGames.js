@@ -21,7 +21,7 @@ const TopRatedGames = () => {
                 {
                     games.map(game => {
                         return(
-                            <Link to="/game/">
+                            <Link to={`/game/${game._id}`}>
                                 <div className="p-4 lg:w-1/1">
                                     <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                     <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={game.img}/>

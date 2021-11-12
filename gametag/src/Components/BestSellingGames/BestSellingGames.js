@@ -12,6 +12,7 @@ const BestSellingGames = () => {
             .then(data => setGames(data))
     }, []);
 
+
     return (
         <div className="flex flex-wrap -m-5 p-12">
             <div className="p-2 lg:w-1/1 md:w-1/1 w-full">
@@ -21,7 +22,7 @@ const BestSellingGames = () => {
                 {
                     games.map(game => {
                         return(
-                            <Link to="/">
+                            <Link to={`/game/${game._id}`}>
                                 <div className="p-4 lg:w-1/1">
                                     <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                     <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={game.img}/>

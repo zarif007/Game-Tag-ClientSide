@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import domain from '../../Domain'
 
 const FreeGames = () => {
 
     const [games, setGames] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${domain}games/free`)
             .then(res => res.json())
             .then(data => setGames(data))
     }, []);
+
+    const showDetails = id => {
+        navigate(`/game/${id}`);
+    }
 
     return (
         <section className="container p-6 mx-auto bg-white" style={{ "backgroundColor": "black" }}>
@@ -23,7 +28,7 @@ const FreeGames = () => {
                     {
                         games.map(game => {
                             return(
-                                <Link to="/">
+                                <button onClick={() => showDetails(game._id)}>
                                     <div class="flex flex-col items-center justify-center max-w-sm mx-auto">
                                         <img className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" src={game.img}/>
 
@@ -31,7 +36,7 @@ const FreeGames = () => {
                                             <h3 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">{game.name}</h3>
                                         </div>
                                     </div>
-                                </Link>
+                                </button>
                             )
                         })
                     }

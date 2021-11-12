@@ -5,17 +5,20 @@ import {
 } from "react-router-dom";
 import './App.css';
 import AllGames from "./Components/AllGames/AllGames";
-import Games from "./Components/Games/Games";
+import Game from "./Components/Game/Game";
 import Home from "./Components/Home/Home";
-import NavBar from './Components/NavBar/NavBar';
+import NavBar from "./Components/NavBar/NavBar";
+
 
 function App() {
     return (
         <div className="App">
             <Router>
+                <NavBar></NavBar>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/allgames" element={<AllGames />} />
+                    <Route path="/game/:id" element={<Game />} />
                 </Routes>
             </Router>
         </div>

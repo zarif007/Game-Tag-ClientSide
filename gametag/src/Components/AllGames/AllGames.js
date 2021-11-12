@@ -26,7 +26,7 @@ const AllGames = () => {
                     {
                         games.map(game => {
                             return(
-                                <Link to="/">
+                                <Link to={`/game/${game._id}`}>
                                     <div className="w-full h-full max-w-xs text-center pb-12">
                                         <img className="object-cover object-center w-full h-full mx-auto rounded-lg" src={game.img} alt="avatar"/>
 
