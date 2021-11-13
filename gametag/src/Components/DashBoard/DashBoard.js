@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import { useParams } from "react-router";
+import useAuth from "../../customHooks/useAuth";
+import domain from '../../Domain'
 
 
 
 export default function DashBoard() {
     const [show, setShow] = useState(false);
+
+    const {user} = useAuth();
+    
 
 
     return (
@@ -12,8 +18,9 @@ export default function DashBoard() {
                 <div className="flex flex-no-wrap">
                     {/* Sidebar starts */}
                     <div className="absolute lg:relative w-64 h-screen shadow bg-gray-900 hidden lg:block">
-                        <div className="h-16 w-full flex items-center px-8">
-                            <h1 className="text-white">Name</h1>
+                        <div className="h-16 w-full flex flex-col items-center px-8">
+                            <h1 className="text-white">{user.displayName}</h1>
+                            <h2 className="text-white">{user.email}</h2>
                         </div>
                         <ul aria-orientation="vertical" className=" py-6">
                             <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
@@ -58,8 +65,9 @@ export default function DashBoard() {
                                             </svg>
                                         </div>
                                     </div>
-                                    <div className="h-16 w-full flex items-center px-8">
-                                        <h1 className="text-white">Name</h1>
+                                    <div className="h-16 w-full flex flex-col items-center px-8">
+                                        <h1 className="text-white">{user.displayName}</h1>
+                                        <h2 className="text-white">{user.email}</h2>
                                     </div>
                                     <ul aria-orientation="vertical" className=" py-6">
                                         <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">

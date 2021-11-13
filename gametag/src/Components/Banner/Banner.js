@@ -14,7 +14,7 @@ const Banner = () => {
                         </div>
                         <HashLink to='/#games' className="px-12 py-4 bg-blue-700 hover:bg-blue-800 transition duration-100 ease-in-out shadow hover:shadow-lg transform hover:scale-110 text-white font-semibold text-lg rounded-full inline-block">Buy now</HashLink>
                     </div>
-                    <img className="mx-auto xl:max-w-screen-lg mb-28" src="https://i.ibb.co/strf13Y/Untitled-designu.png" alt="Drone"/>
+                    <img className="mx-auto xl:max-w-screen-lg mb-28" src="https://i.ibb.co/strf13Y/Untitled-designu.png" alt="Monster"/>
                 </div>
             </section>
     )

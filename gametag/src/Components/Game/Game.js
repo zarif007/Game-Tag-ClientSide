@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
+import useAuth from '../../customHooks/useAuth';
 import domain from '../../Domain'
+import axios from 'axios'
+import swal from 'sweetalert';
 
 
 const Game = () => {
     const {id} = useParams();
 
+    const {user} = useAuth();
+
     const [game, setGame] = useState({});
 
+    const history = useHistory();
 
     useEffect(() => {
         fetch(`${domain}game/${id}`)
@@ -15,7 +21,36 @@ const Game = () => {
             .then(data => setGame(data))
     } ,[])
 
-    console.log(game);
+    const today = new Date().toLocaleDateString();
+
+    const data = {
+        clientId: user.uid,
+        gameName: game.name,
+        gamePrice: game.price,
+        status: 'pending',
+        date: today, 
+    }
+
+
+    const addToOrders = () =>{
+        axios.post(`${domain}orders`,
+        data) .then(res => console.log(res));
+        
+        swal({
+          title: "Order Added",
+          text: "Want to visit Your orders?",
+          icon: "success",
+          buttons: true,
+          dangerMode: false,
+        })
+        .then((willDelete) => {
+              if (willDelete) {
+                  history.push(`/dashboard`);
+              } else {
+                  history.push(`/`);
+              }
+        });
+    } 
 
     
     return (
@@ -48,7 +83,7 @@ const Game = () => {
                             <div className="mt-1 font-medium text-white text-white bg-blue-700 rounded p-1">-{game.discount}%</div>
                             <span className="title-font font-medium text-2xl  text-white">${game.price}</span>
                         </div>
-                    <button class="flex ml-auto text-white bg-blue-700 border-0 py-2 px-6 focus:outline-none hover:bg-blue-800 rounded">Add to Wishlist</button>
+                    <button onClick={addToOrders} class="flex ml-auto text-white bg-blue-700 border-0 py-2 px-6 focus:outline-none hover:bg-blue-800 rounded">Add to Wishlist</button>
                     </div>
                 </div>
                 <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={game.img} />

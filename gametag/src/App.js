@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import AllGames from "./Components/AllGames/AllGames";
+import CHK from "./Components/Authentication/LogIn/chk";
 import LogIn from "./Components/Authentication/LogIn/LogIn";
 import PrivateRoute from "./Components/Authentication/PrivateRoute.js/PrivateRoute";
 import Register from "./Components/Authentication/Register/Register";
@@ -31,14 +32,17 @@ function App() {
                         <PrivateRoute exact path="/game/:id">
                             <Game />
                         </PrivateRoute>
-                        <Route exact path="/dashboard">
+                        <PrivateRoute exact path="/dashboard">
                             <DashBoard />
-                        </Route>
+                        </PrivateRoute>
                         <Route exact path="/login">
                             <LogIn />
                         </Route>
                         <Route exact path="/register">
                             <Register />
+                        </Route>
+                        <Route exact path="/chk">
+                            <CHK></CHK>
                         </Route>
                     </Switch>
                 </Router>

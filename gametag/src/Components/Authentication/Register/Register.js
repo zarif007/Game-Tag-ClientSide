@@ -78,7 +78,7 @@ const Register = () => {
 
 
     const saveToDB = (email, displayName, METHOD) => {
-        const user = {email, displayName};
+        const user = {email, displayName, role: 'Customer'};
 
         fetch(`${domain}users`, {
             method: METHOD,
