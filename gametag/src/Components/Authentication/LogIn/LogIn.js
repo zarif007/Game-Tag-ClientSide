@@ -3,6 +3,7 @@ import {  useLocation, useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import useAuth from '../../../customHooks/useAuth';
+import domain from '../../../Domain'
 
 
 
@@ -25,6 +26,7 @@ const LogIn = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
+                saveToDB(res.user.email, res.user.displayName, 'PUT');
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -55,6 +57,18 @@ const LogIn = () => {
                 setError(error.message);
             })
             .finally(() => setIsLoading(false));
+    }
+
+    const saveToDB = (email, displayName, METHOD) => {
+        const user = {email, displayName};
+
+        fetch(`${domain}users`, {
+            method: METHOD,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }) .then()
     }
 
     return (

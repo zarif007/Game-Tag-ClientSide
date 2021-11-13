@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate, useHistory } from 'react-router';
 import { Link } from "react-router-dom";
 import useAuth from "../../../customHooks/useAuth";
+import domain from '../../../Domain'
 
 
 const Register = () => {
@@ -25,6 +26,7 @@ const Register = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
+                saveToDB(res.user.email, res.user.displayName, 'PUT');
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -66,12 +68,25 @@ const Register = () => {
                 const user = res.user;
                 updateProfile(auth.currentUser, {displayName: name})
                     .then(res => {})
-                console.log(user);
+                saveToDB(email, name, 'POST');
                 history.push('/login');
             })
             .catch((error) => {
                 setError(error.message);
             });
+    }
+
+
+    const saveToDB = (email, displayName, METHOD) => {
+        const user = {email, displayName};
+
+        fetch(`${domain}users`, {
+            method: METHOD,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }) .then()
     }
 
     return (
