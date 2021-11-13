@@ -96,7 +96,7 @@ const AllOrders = () => {
         <>
             <div className="mb-10 text-center mt-12">
                 <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white dark:text-white sm:text-4xl">
-                    All Your Orders ({orders.length})
+                  Your All Orders ({orders.length})
                 </p>
             </div>
             {

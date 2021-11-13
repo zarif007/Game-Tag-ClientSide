@@ -16,6 +16,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import AuthProvider from "./contexts/AuthProvider";
 import ConfirmedOrders from './Components/DashBoard/ConfirmedOrders/ConfirmedOrders';
 import Review from "./Components/DashBoard/Review/Review";
+import PaidOrders from "./Components/DashBoard/PaidOrders/PaidOrders";
 
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
                         </PrivateRoute>
                         <PrivateRoute path="/confirmedorders">
                             <ConfirmedOrders></ConfirmedOrders>
+                        </PrivateRoute>
+                        <PrivateRoute path="/paidorders">
+                            <PaidOrders></PaidOrders>
                         </PrivateRoute>
                         <PrivateRoute path="/review">
                             <Review></Review>

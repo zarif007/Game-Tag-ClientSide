@@ -12,6 +12,7 @@ import {
 import AllOrders from "./AllOrders/AllOrders";
 import ConfirmedOrders from "./ConfirmedOrders/ConfirmedOrders";
 import Review from './Review/Review';
+import PaidOrders from "./PaidOrders/PaidOrders";
 
 
 
@@ -45,6 +46,13 @@ export default function DashBoard() {
                                 <Link to={`${url}/confirmedorders`}><div className="flex items-center">
                                     
                                     <span className="ml-2">Confirmed Orders</span>
+                                    </div>
+                                </Link>
+                            </li>
+                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                <Link to={`${url}/paidorders`}><div className="flex items-center">
+                                    
+                                    <span className="ml-2">Paid Orders</span>
                                     </div>
                                 </Link>
                             </li>
@@ -142,6 +150,9 @@ export default function DashBoard() {
                                     </Route>
                                     <Route path={`${path}/confirmedorders`}>
                                         <ConfirmedOrders></ConfirmedOrders>
+                                    </Route>
+                                    <Route path={`${path}/paidorders`}>
+                                        <PaidOrders></PaidOrders>
                                     </Route>
                                     <Route path={`${path}/review`}>
                                         <Review></Review>
