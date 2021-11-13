@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
+import useAuth from '../../customHooks/useAuth';
 
 
 const navigation = [
@@ -19,9 +20,10 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  const { user, logOut } = useAuth();
+  console.log('user', user);
 
   let link = '';
-  let user = 'ok'
   if(!user)
     link = '/login';
   else 
@@ -45,10 +47,9 @@ export default function NavBar() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
-                        src="https://i.ibb.co/7KQ4pgt/Game-Tag.png"
+                        src="https://cdn-icons-png.flaticon.com/512/3062/3062652.png"
                         alt="Workflow"
                       />
-                      
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -74,19 +75,19 @@ export default function NavBar() {
                     <div className="ml-4 flex items-center md:ml-6">
                       
                       {
-                        user ? 
+                        user.displayName ? 
                           <Menu as="div" className="ml-3 relative">
                           <div className="flex">
                             <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                               <span className="sr-only">Open user menu</span>
-                              {/* <img className="h-8 w-8 rounded-full" src={user.photoURL} alt="" />
+                              <img className="h-8 w-8 rounded-full" src={user.photoURL} alt="" />
                               <div className="ml-3">
                                 <div className="text-base font-medium leading-none text-white">{user.displayName}</div>
-                              </div> */}
+                              </div>
                               
                             </Menu.Button>
                               <div className="p-2">
-                                <button type="button" class="py-2 px-4  bg-gray-700 hover:bg-gray-800 focus:ring-gray-600 focus:ring-offset-gray-300 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                                <button onClick={logOut} type="button" class="py-2 px-4  bg-gray-700 hover:bg-gray-800 focus:ring-gray-600 focus:ring-offset-gray-300 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                     Sign Out
                                 </button>
                               </div>
@@ -160,16 +161,16 @@ export default function NavBar() {
                   ))}
                 </div>
                 {
-                  user ? 
+                  user.displayName ? 
                     <div>
                       <div className="pt-4 pb-3 border-t border-gray-700">
                         <div className="flex items-center px-5">
-                          {/* <div className="flex-shrink-0">
+                          <div className="flex-shrink-0">
                             <img className="h-10 w-10 rounded-full" src={user.photoURL} alt="" />
                           </div>
                           <div className="ml-3">
                             <div className="text-base font-medium leading-none text-white">{user.displayName}</div>
-                          </div> */}
+                          </div>
                           
                         </div>
                         <div className="mt-3 px-2 space-y-1">
@@ -182,7 +183,7 @@ export default function NavBar() {
                               {item.name}
                             </HashLink>
                           ))} <div className="p-2">
-                          <button type="button" class="py-2 px-4  bg-gray-700 hover:bg-gray-800 focus:ring-gray-600 focus:ring-offset-gray-300 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                          <button onClick={logOut} type="button" class="py-2 px-4  bg-gray-700 hover:bg-gray-800 focus:ring-gray-600 focus:ring-offset-gray-300 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                               Sign Out
                           </button>
                         </div>

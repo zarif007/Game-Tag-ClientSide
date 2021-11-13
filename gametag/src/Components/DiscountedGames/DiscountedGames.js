@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useHistory } from 'react-router';
 import domain from '../../Domain'
 
 const DiscountedGames = () => {
     const [games, setGames] = useState([]);
-    const navigate = useNavigate();
+    const history = useHistory();
 
     console.log(`${domain}games/onsale`);
     useEffect(() => {
@@ -14,7 +14,7 @@ const DiscountedGames = () => {
     }, []);
 
     const showDetails = id => {
-        navigate(`/game/${id}`);
+        history.push(`/game/${id}`);
     }
 
     return (

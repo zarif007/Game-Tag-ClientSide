@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useHistory } from 'react-router';
 import domain from '../../Domain'
 
 const FreeGames = () => {
 
     const [games, setGames] = useState([]);
-    const navigate = useNavigate();
+    const history = useHistory();
 
     useEffect(() => {
         fetch(`${domain}games/free`)
@@ -14,7 +14,7 @@ const FreeGames = () => {
     }, []);
 
     const showDetails = id => {
-        navigate(`/game/${id}`);
+        history.push(`/game/${id}`);
     }
 
     return (
