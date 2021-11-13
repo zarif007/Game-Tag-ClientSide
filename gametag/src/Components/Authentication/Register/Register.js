@@ -26,7 +26,7 @@ const Register = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
-                saveToDB(res.user.email, res.user.displayName, 'PUT');
+                saveToDB(res.user.email, res.user.displayName, res.user.uid, 'PUT');
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -68,7 +68,7 @@ const Register = () => {
                 const user = res.user;
                 updateProfile(auth.currentUser, {displayName: name})
                     .then(res => {})
-                saveToDB(email, name, 'POST');
+                saveToDB(email, name, user.uid, 'POST');
                 history.push('/login');
             })
             .catch((error) => {
@@ -77,8 +77,8 @@ const Register = () => {
     }
 
 
-    const saveToDB = (email, displayName, METHOD) => {
-        const user = {email, displayName, role: 'Customer'};
+    const saveToDB = (email, displayName, uid, METHOD) => {
+        const user = {email, displayName, fireBaseId: uid, role: 'Customer'};
 
         fetch(`${domain}users`, {
             method: METHOD,

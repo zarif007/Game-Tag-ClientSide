@@ -1,51 +1,59 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import useAuth from "../../customHooks/useAuth";
 import domain from '../../Domain'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    useRouteMatch
+  } from "react-router-dom";
+import AllOrders from "./AllOrders/AllOrders";
+import ConfirmedOrders from "./ConfirmedOrders/ConfirmedOrders";
+import Review from './Review/Review';
 
 
 
 export default function DashBoard() {
     const [show, setShow] = useState(false);
+    let { path, url } = useRouteMatch();
 
     const {user} = useAuth();
     
-
+    console.log(path, url);
 
     return (
         <>
             <div className="w-full h-full" style={{"backgroundColor": 'black'}}>
                 <div className="flex flex-no-wrap">
                     {/* Sidebar starts */}
-                    <div className="absolute lg:relative w-64 h-screen shadow bg-gray-900 hidden lg:block">
+                    <div className="absolute lg:relative w-64 min-h-screen shadow bg-gray-900 hidden lg:block">
                         <div className="h-16 w-full flex flex-col items-center px-8">
                             <h1 className="text-white">{user.displayName}</h1>
                             <h2 className="text-white">{user.email}</h2>
                         </div>
                         <ul aria-orientation="vertical" className=" py-6">
                             <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
+                                <Link to={`${url}`}><div className="flex items-center">
                                     
-                                    <span className="ml-2">Products</span>
-                                </div>
+                                    <span className="ml-2">All Orders</span>
+                                    </div>
+                                </Link>
                             </li>
                             <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
+                                <Link to={`${url}/confirmedorders`}><div className="flex items-center">
                                     
-                                    <span className="ml-2">Products</span>
-                                </div>
+                                    <span className="ml-2">Confirmed Orders</span>
+                                    </div>
+                                </Link>
                             </li>
                             <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
+                                <Link to={`${url}/review`}><div className="flex items-center">
                                     
-                                    <span className="ml-2">Performance</span>
-                                </div>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
-                                    
-                                    <span className="ml-2">Deliverables</span>
-                                </div>
+                                    <span className="ml-2">Review</span>
+                                    </div>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -71,22 +79,28 @@ export default function DashBoard() {
                                     </div>
                                     <ul aria-orientation="vertical" className=" py-6">
                                         <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <div className="flex items-center">
-                                                
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Products</span>
-                                            </div>
+                                            <Link to={`${url}`}>
+                                                <div className="flex items-center">
+                                                    
+                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">All orders</span>
+                                                </div>
+                                            </Link>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <div className="flex items-center">
-                                                
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Products</span>
-                                            </div>
+                                            <Link to={`${url}/confirmedorders`}>
+                                                <div className="flex items-center">
+                                                    
+                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Confirmed Orders</span>
+                                                </div>
+                                            </Link>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <div className="flex items-center">
-                                                
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Performance</span>
-                                            </div>
+                                            <Link to={`${url}/review`}>
+                                                <div className="flex items-center">
+                                                    
+                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Review</span>
+                                                </div>
+                                            </Link>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                             <div className="flex items-center">
@@ -102,6 +116,7 @@ export default function DashBoard() {
                     {/*Mobile responsive sidebar*/}
                     {/* Sidebar ends */}
                     <div className="w-full">
+                        
                         {/* Navigation starts */}
                         <nav className="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-grey-900 shadow relative z-10">
                             
@@ -118,11 +133,24 @@ export default function DashBoard() {
                             </div>
                         </nav>
                         {/* Navigation ends */}
-                        {/* Remove class [ h-64 ] when adding a card block */}
-                        <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-                            {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-                            <div className="w-full h-full rounded border-dashed border-2 border-gray-300">{/* Place your content here */}</div>
+
+                        <div className="container mx-auto md:w-4/5 w-11/12">
+                            <div className="w-full h-full">
+                                <Switch>
+                                    <Route exact path={path}>
+                                        <AllOrders></AllOrders>
+                                    </Route>
+                                    <Route path={`${path}/confirmedorders`}>
+                                        <ConfirmedOrders></ConfirmedOrders>
+                                    </Route>
+                                    <Route path={`${path}/review`}>
+                                        <Review></Review>
+                                    </Route>
+                                    
+                                </Switch>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

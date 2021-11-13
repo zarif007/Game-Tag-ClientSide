@@ -14,6 +14,8 @@ import Game from "./Components/Game/Game";
 import Home from "./Components/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import AuthProvider from "./contexts/AuthProvider";
+import ConfirmedOrders from './Components/DashBoard/ConfirmedOrders/ConfirmedOrders';
+import Review from "./Components/DashBoard/Review/Review";
 
 
 function App() {
@@ -32,8 +34,14 @@ function App() {
                         <PrivateRoute exact path="/game/:id">
                             <Game />
                         </PrivateRoute>
-                        <PrivateRoute exact path="/dashboard">
+                        <PrivateRoute path="/dashboard">
                             <DashBoard />
+                        </PrivateRoute>
+                        <PrivateRoute path="/confirmedorders">
+                            <ConfirmedOrders></ConfirmedOrders>
+                        </PrivateRoute>
+                        <PrivateRoute path="/review">
+                            <Review></Review>
                         </PrivateRoute>
                         <Route exact path="/login">
                             <LogIn />

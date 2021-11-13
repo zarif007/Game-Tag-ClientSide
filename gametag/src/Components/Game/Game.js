@@ -13,6 +13,9 @@ const Game = () => {
 
     const [game, setGame] = useState({});
 
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
     const history = useHistory();
 
     useEffect(() => {
@@ -23,10 +26,21 @@ const Game = () => {
 
     const today = new Date().toLocaleDateString();
 
+    const handleEmail = e => {
+        setEmail(e.target.value);
+    }
+
+    const handlePhoneNumber = e => {
+        setPhoneNumber(e.target.value);
+    }
+
     const data = {
         clientId: user.uid,
+        email: email || user.email,
+        phoneNumber: phoneNumber,
         gameName: game.name,
         gamePrice: game.price,
+        gameImg: game.img,
         status: 'pending',
         date: today, 
     }
@@ -77,6 +91,12 @@ const Game = () => {
                     <div class="flex border-t border-b mb-6 border-gray-800 py-2 m-5">
                         <span class="text-blue-400 ">Rating</span>
                         <span class="ml-auto text-white">{game.rate}/10</span>
+                    </div>
+                    <div class="flex border-t border-b mb-6 border-gray-800 py-2 m-5">
+                        <input onBlur={handleEmail} defaultValue={user.email} type="email" placeholder="Email" className="bg-blue-900 text-white transition duration-500 border h-12 rounded w-full px-2 mb-2"/>
+                    </div>
+                    <div class="flex border-t border-b mb-6 border-gray-800 py-2 m-5">
+                        <input onBlur={handlePhoneNumber} placeholder="Phone Number" className="bg-blue-900 text-white transition duration-500 border h-12 rounded w-full px-2 mb-2"/>
                     </div>
                     <div class="flex">
                         <div className="flex items-center justify-center gap-3">

@@ -26,7 +26,7 @@ const LogIn = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
-                saveToDB(res.user.email, res.user.displayName, 'PUT');
+                saveToDB(res.user.email, res.user.displayName, res.user.uid, 'PUT');
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -59,8 +59,8 @@ const LogIn = () => {
             .finally(() => setIsLoading(false));
     }
 
-    const saveToDB = (email, displayName, METHOD) => {
-        const user = {email, displayName, role: 'Customer'};
+    const saveToDB = (email, displayName, uid, METHOD) => {
+        const user = {email, displayName, fireBaseId: uid, role: 'Customer'};
 
         fetch(`${domain}users`, {
             method: METHOD,
