@@ -60,7 +60,7 @@ const LogIn = () => {
     }
 
     const saveToDB = (email, displayName, uid, METHOD) => {
-        const user = {email, displayName, fireBaseId: uid, role: 'Customer'};
+        const user = {email, displayName, fireBaseId: uid};
 
         fetch(`${domain}users`, {
             method: METHOD,

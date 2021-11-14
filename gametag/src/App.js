@@ -17,6 +17,8 @@ import AuthProvider from "./contexts/AuthProvider";
 import ConfirmedOrders from './Components/DashBoard/ConfirmedOrders/ConfirmedOrders';
 import Review from "./Components/DashBoard/Review/Review";
 import PaidOrders from "./Components/DashBoard/PaidOrders/PaidOrders";
+import AddAdmin from "./Components/DashBoard/AddAdmin/AddAdmin";
+import AddAGame from "./Components/DashBoard/AddAGame/AddAGame";
 
 
 function App() {
@@ -46,6 +48,12 @@ function App() {
                         </PrivateRoute>
                         <PrivateRoute path="/review">
                             <Review></Review>
+                        </PrivateRoute>
+                        <PrivateRoute path="/addanadmin">
+                            <AddAdmin />
+                        </PrivateRoute>
+                        <PrivateRoute path="/addagame">
+                            <AddAGame />
                         </PrivateRoute>
                         <Route exact path="/login">
                             <LogIn />

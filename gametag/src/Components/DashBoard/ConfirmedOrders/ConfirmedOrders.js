@@ -30,7 +30,7 @@ const ConfirmedOrders = () => {
           
       }) .then(swal({
           title: "Success!",
-          text: "You order has been Paid!",
+          text: "You order has been Paid! ",
           icon: "success",
           button: "ok!",
           

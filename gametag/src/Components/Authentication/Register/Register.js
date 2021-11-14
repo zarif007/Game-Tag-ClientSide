@@ -49,19 +49,7 @@ const Register = () => {
 
     const handleRegistraion = e => {
         e.preventDefault();
-        if (password.length < 8) {
-            setError("Your password must be at least 8 characters"); 
-            return;
-        }
-        if (password.search(/[a-z]/i) < 0) {
-            setError("Your password must contain at least one letter.");
-            return;
-        }
-        if (password.search(/[0-9]/) < 0) {
-            setError("Your password must contain at least one digit."); 
-            return;
-        }
-
+        
         console.log(email, password);
         createUserWithEmailAndPassword(auth, email, password)
             .then(res => {
@@ -78,7 +66,7 @@ const Register = () => {
 
 
     const saveToDB = (email, displayName, uid, METHOD) => {
-        const user = {email, displayName, fireBaseId: uid, role: 'Customer'};
+        const user = {email, displayName, fireBaseId: uid};
 
         fetch(`${domain}users`, {
             method: METHOD,

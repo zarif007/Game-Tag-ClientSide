@@ -9,6 +9,7 @@ const AllOrders = () => {
 
     const {user} = useAuth();
     const [orders, setOrders] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
     const history = useHistory();
 
 
@@ -17,6 +18,19 @@ const AllOrders = () => {
           .then(res => res.json())
           .then(data => setOrders(data));
     }, [])
+
+    useEffect(() => {
+      fetch(`${domain}userinfo/${user.uid}`)
+          .then(res => res.json())
+          .then(data => setUserInfo(data))
+    } ,[])
+
+
+    let title = 'Your All Orders';
+
+    if(userInfo.role === 'Admin')
+      title = 'All Users Orders';
+    
 
     const cancelOrder = id => {
 
@@ -96,7 +110,7 @@ const AllOrders = () => {
         <>
             <div className="mb-10 text-center mt-12">
                 <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white dark:text-white sm:text-4xl">
-                  Your All Orders ({orders.length})
+                  {title} ({orders.length})
                 </p>
             </div>
             {

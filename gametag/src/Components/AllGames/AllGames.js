@@ -26,11 +26,11 @@ const AllGames = () => {
                     {
                         games.map(game => {
                             return(
-                                <Link to={`/game/${game._id}`}>
+                                <Link to={`/game/${game._id}`} className="mt-8">
                                     <div className="w-full h-full max-w-xs text-center pb-12">
                                         <img className="object-cover object-center w-full h-full mx-auto rounded-lg" src={game.img} alt="avatar"/>
 
-                                        <div className="mt-2">
+                                        <div className="mt-2 mb-2">
                                             <h3 className="text-lg font-medium text-white dark:text-white">{game.name}</h3>
                                             <div className="flex items-center justify-center gap-2 ">
                                                 <div className="mt-1 font-medium text-white text-white bg-blue-700 rounded p-1">Ratings: {game.rate}/10</div>

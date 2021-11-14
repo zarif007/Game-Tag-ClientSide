@@ -9,9 +9,8 @@ import useAuth from '../../customHooks/useAuth';
 const navigation = [
   { name: 'Home', href: '/#', current: false },
   { name: 'Partners', href: '/#partners', current: false },
-  { name: 'Medicines', href: '/#medicines', current: false },
-  { name: 'Features', href: '/#features', current: false },
-  { name: 'Pricing', href: '/#pricing', current: false },
+  { name: 'Games', href: '/#games', current: false },
+  { name: 'Reviews', href: '/#reviews', current: false },
 ]
 
 

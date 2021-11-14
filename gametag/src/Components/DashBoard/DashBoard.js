@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../customHooks/useAuth";
 import domain from '../../Domain'
 import {
@@ -7,22 +7,31 @@ import {
     Route,
     Link,
     useParams,
-    useRouteMatch
+    useRouteMatch,
   } from "react-router-dom";
 import AllOrders from "./AllOrders/AllOrders";
 import ConfirmedOrders from "./ConfirmedOrders/ConfirmedOrders";
 import Review from './Review/Review';
 import PaidOrders from "./PaidOrders/PaidOrders";
+import AddAdmin from "./AddAdmin/AddAdmin";
+import AddAGame from './AddAGame/AddAGame';
 
 
 
 export default function DashBoard() {
     const [show, setShow] = useState(false);
+    const [userInfo, setUserInfo] = useState({});
     let { path, url } = useRouteMatch();
 
     const {user} = useAuth();
+
+    useEffect(() => {
+        fetch(`${domain}userinfo/${user.uid}`)
+            .then(res => res.json())
+            .then(data => setUserInfo(data))
+    } ,[])
     
-    console.log(path, url);
+
 
     return (
         <>
@@ -34,36 +43,61 @@ export default function DashBoard() {
                             <h1 className="text-white">{user.displayName}</h1>
                             <h2 className="text-white">{user.email}</h2>
                         </div>
-                        <ul aria-orientation="vertical" className=" py-6">
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <Link to={`${url}`}><div className="flex items-center">
-                                    
-                                    <span className="ml-2">All Orders</span>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <Link to={`${url}/confirmedorders`}><div className="flex items-center">
-                                    
-                                    <span className="ml-2">Confirmed Orders</span>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <Link to={`${url}/paidorders`}><div className="flex items-center">
-                                    
-                                    <span className="ml-2">Paid Orders</span>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <Link to={`${url}/review`}><div className="flex items-center">
-                                    
-                                    <span className="ml-2">Review</span>
-                                    </div>
-                                </Link>
-                            </li>
-                        </ul>
+                        {
+                            userInfo.role !== 'Admin' ?
+                            <ul aria-orientation="vertical" className=" py-6">
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Your all Orders</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}/confirmedorders`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Confirmed Orders</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}/paidorders`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Paid Orders</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}/review`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Review</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                            </ul> : <ul>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">All Users Orders</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}/addanadmin`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Add an Admin</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={`${url}/addagame`}><div className="flex items-center">
+                                        
+                                        <span className="ml-2">Add a Game</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        }
                     </div>
                     {/*Mobile responsive sidebar*/}
                     <div className={show ? "w-full h-full absolute z-40  transform  translate-x-0 " : "   w-full h-full absolute z-40  transform -translate-x-full"} id="mobile-nav">
@@ -85,38 +119,59 @@ export default function DashBoard() {
                                         <h1 className="text-white">{user.displayName}</h1>
                                         <h2 className="text-white">{user.email}</h2>
                                     </div>
-                                    <ul aria-orientation="vertical" className=" py-6">
-                                        <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <Link to={`${url}`}>
-                                                <div className="flex items-center">
-                                                    
-                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">All orders</span>
-                                                </div>
-                                            </Link>
-                                        </li>
-                                        <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <Link to={`${url}/confirmedorders`}>
-                                                <div className="flex items-center">
-                                                    
-                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Confirmed Orders</span>
-                                                </div>
-                                            </Link>
-                                        </li>
-                                        <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <Link to={`${url}/review`}>
-                                                <div className="flex items-center">
-                                                    
-                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Review</span>
-                                                </div>
-                                            </Link>
-                                        </li>
-                                        <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                            <div className="flex items-center">
-                                                
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Deliverables</span>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    {
+                                        userInfo.role !== 'Admin' ?
+                                        <ul aria-orientation="vertical" className=" py-6">
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}`}>
+                                                    <div className="flex items-center">
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">Your All orders</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}/confirmedorders`}>
+                                                    <div className="flex items-center">
+                                                        
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">Confirmed Orders</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}/review`}>
+                                                    <div className="flex items-center">
+                                                        
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">Review</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                        </ul> : <ul>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}`}>
+                                                    <div className="flex items-center">
+                                                        
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">All Users orders</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}/addanadmin`}>
+                                                    <div className="flex items-center">
+                                                        
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">Add an Admin</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <Link to={`${url}/addagame`}>
+                                                    <div className="flex items-center">
+                                                        
+                                                        <span className="ml-2 xl:text-base md:text-2xl text-base">Add a Game</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -156,6 +211,12 @@ export default function DashBoard() {
                                     </Route>
                                     <Route path={`${path}/review`}>
                                         <Review></Review>
+                                    </Route>
+                                    <Route path={`${path}/addanadmin`}>
+                                        <AddAdmin></AddAdmin>
+                                    </Route>
+                                    <Route path={`${path}/addagame`}>
+                                        <AddAGame />
                                     </Route>
                                     
                                 </Switch>
