@@ -12,6 +12,7 @@ const AllGames = () => {
             .then(data => setGames(data))
     }, []);
 
+    console.log('new', `${domain}allgames`);
     
     return (
         <section className="container p-6 mx-auto bg-white" style={{ "backgroundColor": "black" }}>

@@ -28,7 +28,7 @@ const Reviews = () => {
                         {
                             reviews.map(review => {
                                 return(
-                                    <div class="p-4 lg:w-1/6">
+                                    <div class="p-4 lg:w-1/6 sm:w-1/3">
                                         <div class="h-full bg-gray-800 bg-opacity-40 px-8 pt-16 pb-12 rounded-lg overflow-hidden text-center relative">
                                             <h1 class="title-font sm:text-2xl text-xl font-medium text-blue-600 mb-3">{review.user}</h1>
                                             <p class="leading-relaxed sm:text-1xl text-xl font-medium mb-3">{review.review}</p>

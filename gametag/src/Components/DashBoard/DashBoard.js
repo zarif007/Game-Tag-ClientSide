@@ -23,7 +23,7 @@ export default function DashBoard() {
     const [userInfo, setUserInfo] = useState({});
     let { path, url } = useRouteMatch();
 
-    const {user} = useAuth();
+    const {user, logOut} = useAuth();
 
     useEffect(() => {
         fetch(`${domain}userinfo/${user.uid}`)
@@ -74,6 +74,9 @@ export default function DashBoard() {
                                         </div>
                                     </Link>
                                 </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <button className="flex items-conter" onClick={logOut}>LogOut</button>
+                                </li>
                             </ul> : <ul>
                                 <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={`${url}`}><div className="flex items-center">
@@ -95,6 +98,9 @@ export default function DashBoard() {
                                         <span className="ml-2">Add a Game</span>
                                         </div>
                                     </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <button className="flex items-conter" onClick={logOut}>LogOut</button>
                                 </li>
                             </ul>
                         }
@@ -145,6 +151,9 @@ export default function DashBoard() {
                                                     </div>
                                                 </Link>
                                             </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <button className="flex items-conter" onClick={logOut}>LogOut</button>
+                                            </li>
                                         </ul> : <ul>
                                             <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                                 <Link to={`${url}`}>
@@ -169,6 +178,9 @@ export default function DashBoard() {
                                                         <span className="ml-2 xl:text-base md:text-2xl text-base">Add a Game</span>
                                                     </div>
                                                 </Link>
+                                            </li>
+                                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                                <button className="flex items-conter" onClick={logOut}>LogOut</button>
                                             </li>
                                         </ul>
                                     }
