@@ -1,12 +1,12 @@
 import React from 'react'
 import { Redirect } from 'react-router';
 import { Route } from 'react-router'
-import useAuth from '../../../customHooks/useAuth'
+import useAuth from '../../../customHooks/useAuth';
 
 
 const AdminRoute = ({children, ...rest}) => {
     
-    const {user, isLoading} = useAuth();
+    const {user, isLoading, isAdmin} = useAuth();
 
     if(isLoading){
         return(
@@ -16,14 +16,16 @@ const AdminRoute = ({children, ...rest}) => {
         )
     } 
 
+    console.log('isAdmin', isAdmin);
+
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                (user.email && user) ?
+                (user.email && isAdmin) ?
                 children : <Redirect
                     to={{
-                    pathname: "/login",
+                    pathname: "/dashboard",
                     state: { from: location }
                 }}
             ></Redirect>

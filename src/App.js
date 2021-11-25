@@ -19,6 +19,7 @@ import Review from "./Components/DashBoard/Review/Review";
 import PaidOrders from "./Components/DashBoard/PaidOrders/PaidOrders";
 import AddAdmin from "./Components/DashBoard/AddAdmin/AddAdmin";
 import AddAGame from "./Components/DashBoard/AddAGame/AddAGame";
+import AdminRoute from './Components/DashBoard/AdminRoute/AdminRoute';
 
 
 function App() {
@@ -49,12 +50,12 @@ function App() {
                         <PrivateRoute path="/review">
                             <Review></Review>
                         </PrivateRoute>
-                        <PrivateRoute path="/addanadmin">
+                        <AdminRoute path="/addanadmin">
                             <AddAdmin />
-                        </PrivateRoute>
-                        <PrivateRoute path="/addagame">
+                        </AdminRoute>
+                        <AdminRoute path="/addagame">
                             <AddAGame />
-                        </PrivateRoute>
+                        </AdminRoute>
                         <Route exact path="/login">
                             <LogIn />
                         </Route>

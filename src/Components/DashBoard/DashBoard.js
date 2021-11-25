@@ -14,6 +14,7 @@ import Review from './Review/Review';
 import PaidOrders from "./PaidOrders/PaidOrders";
 import AddAdmin from "./AddAdmin/AddAdmin";
 import AddAGame from './AddAGame/AddAGame';
+import AdminRoute from './AdminRoute/AdminRoute';
 
 
 
@@ -260,12 +261,12 @@ export default function DashBoard() {
                                     <Route path={`${path}/review`}>
                                         <Review></Review>
                                     </Route>
-                                    <Route path={`${path}/addanadmin`}>
+                                    <AdminRoute path={`${path}/addanadmin`}>
                                         <AddAdmin></AddAdmin>
-                                    </Route>
-                                    <Route path={`${path}/addagame`}>
+                                    </AdminRoute>
+                                    <AdminRoute path={`${path}/addagame`}>
                                         <AddAGame />
-                                    </Route>
+                                    </AdminRoute>
                                     
                                 </Switch>
                             </div>
