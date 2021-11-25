@@ -11,7 +11,7 @@ const AddAGame = () => {
     const history = useHistory();
     const [game, setGame] = useState({});
 
-    const {user} = useAuth();
+    const {user, token} = useAuth();
 
     const handleInput = e => {
         const field = e.target.name;
@@ -27,6 +27,7 @@ const AddAGame = () => {
         fetch(`${domain}games`, {
           method: 'POST',
           headers: {
+              'authorization': `Token ${token}`,
               'content-type': 'application/json'
           },
           body: JSON.stringify(game)

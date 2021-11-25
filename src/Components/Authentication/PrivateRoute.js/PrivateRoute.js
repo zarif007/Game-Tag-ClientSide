@@ -10,7 +10,7 @@ const PrivateRoute = ({children, ...rest}) => {
 
     if(isLoading){
         return(
-            <div class=" flex justify-center items-center">
+            <div class="p-12 flex justify-center items-center">
                 <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
             </div>
         )

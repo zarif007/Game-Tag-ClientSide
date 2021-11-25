@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, getIdToken, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeAuthentication from './../Components/Authentication/FireBase/firebase.init';
 import domain from './../Domain';
@@ -11,6 +11,7 @@ const useFireBase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [token, setToken] = useState('');
 
     const auth = getAuth();
     
@@ -20,6 +21,12 @@ const useFireBase = () => {
 
         return signInWithPopup(auth, googleProvider);
     }
+
+    useEffect(() => {
+        fetch(`${domain}userinfo/${user.uid}`)
+            .then(res => res.json())
+            .then(data => setIsAdmin(data.isAdmin))
+    }, [user.email])
 
     const logOut = () => {
         setIsLoading(true);
@@ -32,22 +39,21 @@ const useFireBase = () => {
     useEffect(() => {
 
         const unSubscribe = onAuthStateChanged(auth, user => {
-            if(user) 
+            if(user) {
                 setUser(user);
-            else 
+                getIdToken(user)
+                    .then(idToken => {
+                        setToken(idToken);
+                    })
+            } else { 
                 setUser({});
+            }
             
             setIsLoading(false)
         })
 
         return () => unSubscribe;
     } ,[])
-
-    useEffect(() => {
-        fetch(`${domain}userinfo/${user.uid}`)
-            .then(res => res.json())
-            .then(data => setIsAdmin(data.isAdmin))
-    }, [user.email])
 
 
     return {
@@ -58,6 +64,7 @@ const useFireBase = () => {
         logOut,
         isLoading,
         setIsLoading,
+        token,
     }
 }
 

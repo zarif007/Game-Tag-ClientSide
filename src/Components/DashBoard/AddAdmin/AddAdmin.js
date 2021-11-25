@@ -11,7 +11,7 @@ const AddAdmin = () => {
     const history = useHistory();
     const [email, setEmail] = useState('');
 
-    const {user} = useAuth();
+    const {user, token} = useAuth();
 
     const handleInput = e => {
         setEmail(e.target.value);
@@ -24,6 +24,7 @@ const AddAdmin = () => {
         fetch(`${domain}makeadmin`, {
           method: 'PATCH',
           headers: {
+              'authorization': `Token ${token}`,
               'content-type': 'application/json'
           },
           body: JSON.stringify(newAdmin)
